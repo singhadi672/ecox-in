@@ -1,0 +1,86 @@
+.nav-main {
+  display: flex;
+  background: #202020;
+  height: 3.5rem;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 3;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  display: flex;
+  width: 15rem;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.nav-logo > img {
+  height: 3rem;
+}
+
+.nav-logo > h1 {
+  font-size: 2.5rem;
+  color: white;
+}
+
+.nav-search {
+  width: 40%;
+}
+
+.input-search {
+  width: 90%;
+  padding: 0.5rem 1rem;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  border: none;
+}
+
+.input-search:focus {
+  outline: none;
+  border: 1px solid black;
+}
+
+.search-logo {
+  padding: 0.5rem 0.5rem;
+  border: none;
+  background: white;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.search-logo:focus {
+  outline: none;
+}
+
+.other-options {
+  width: 20%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.options-btn {
+  border: none;
+  background: none;
+  color: white;
+  font-size: 1rem;
+  padding: 0.3rem;
+}
+
+.item-notification {
+  background: tomato;
+  padding: 0.1rem 0.3rem;
+  border-radius: 1rem;
+  font-size: 0.7rem;
+}
+
+.sign-in-btn {
+  padding: 0.3rem 1rem;
+  background: rgb(223, 56, 84);
+  border: none;
+  color: white;
+  font-size: 1rem;
+  border-radius: 0.3rem;
+}
