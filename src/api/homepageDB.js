@@ -1,3 +1,6 @@
+import faker from "faker";
+import { v4 as uuidv4 } from "uuid";
+
 export const category = [
   {
     categoryName: "Tents",
@@ -28,5 +31,127 @@ export const category = [
     image:
       "https://i.pinimg.com/originals/65/b0/d1/65b0d1415be93b4da925a2fa5967fb46.png",
     applink: "/products?category=jackets",
+  },
+];
+
+export const carouselImages = [
+  "https://rukminim1.flixcart.com/flap/3376/560/image/a248342a1ae24ada.jpg?q=50",
+  "https://rukminim1.flixcart.com/flap/3376/560/image/2b681ab47772ad6c.jpg?q=50",
+  "https://rukminim1.flixcart.com/flap/3376/560/image/0f483a151f2014a8.jpg?q=50",
+  "https://rukminim1.flixcart.com/flap/3376/560/image/6e2c178107bdf74b.jpg?q=50",
+];
+
+export const spotlightData = [
+  {
+    id: uuidv4(),
+    image: faker.image.people(),
+    personName: faker.name.firstName(),
+    offerURL:
+      "https://images-eu.ssl-images-amazon.com/images/G/31/img21/Wireless/Xiaomi/Family/Mi_FAN_Festival/D22243583_WLD_Xiaomi_MiFanFestival_Mobile_Hero_1242x450._CB656404157_SY500_.jpg",
+  },
+  {
+    id: uuidv4(),
+    image: faker.image.city(),
+    personName: faker.name.firstName(),
+    offerURL:
+      "https://images-eu.ssl-images-amazon.com/images/G/31/img20/CEPC/Tablets/TabS7_AprilOffer.jpg",
+  },
+  {
+    id: uuidv4(),
+    image: faker.image.nightlife(),
+    personName: faker.name.firstName(),
+    offerURL:
+      "https://images-eu.ssl-images-amazon.com/images/G/31/img21/Audio/Boat/511v2/R01_Airdopes511_Gw_670x645.jpg",
+  },
+  {
+    id: uuidv4(),
+    image: faker.image.business(),
+    personName: faker.name.firstName(),
+    offerURL:
+      "https://images-eu.ssl-images-amazon.com/images/G/31/img21/OP/Co-op/Navneet/HQ--banner-670X645.gif",
+  },
+  {
+    id: uuidv4(),
+    image: faker.image.city(),
+    personName: faker.name.firstName(),
+    offerURL:
+      "https://images-eu.ssl-images-amazon.com/images/G/31/img21/Wireless/WLA/Feb/FPF/WL_FPF_PC_Hor_1.jpg",
+  },
+  {
+    id: uuidv4(),
+    image: faker.image.nightlife(),
+    personName: faker.name.firstName(),
+    offerURL:
+      "https://images-eu.ssl-images-amazon.com/images/G/31/img20/CEPC/Wearables/Amazfit/Bip_U_Pro/Ingress/Date/AMAZFIT_Bip_U_670x645.jpg",
+  },
+  {
+    id: uuidv4(),
+    image: faker.image.business(),
+    personName: faker.name.firstName(),
+    offerURL:
+      "https://images-eu.ssl-images-amazon.com/images/G/31/img21/Laptops/February/D20687461_IN_PC_Laptops-Laptop-days--Apple-February_vday_670x645.jpg",
+  },
+  {
+    id: uuidv4(),
+    image: faker.image.city(),
+    personName: faker.name.firstName(),
+    offerURL:
+      "https://images-eu.ssl-images-amazon.com/images/G/31/img21/Cameras/Qubo/Doorbell/670x645_Knock_knock.jpg",
+  },
+  {
+    id: uuidv4(),
+    image: faker.image.business(),
+    personName: faker.name.firstName(),
+    offerURL:
+      "https://images-eu.ssl-images-amazon.com/images/G/31/img20/CEPC/Wearables/OnePlus/Watch/Ingress/Price/onepluse_smarteverywere_670x645.jpg",
+  },
+  {
+    id: uuidv4(),
+    image: faker.image.people(),
+    personName: faker.name.firstName(),
+    offerURL:
+      "https://images-eu.ssl-images-amazon.com/images/G/31/img20/PC/Networking/Category/Tp_Link_670x645.jpg",
+  },
+  {
+    id: uuidv4(),
+    image: faker.image.city(),
+    personName: faker.name.firstName(),
+    offerURL:
+      "https://images-eu.ssl-images-amazon.com/images/G/31/img21/Laptops/Microsoft/Surface-Pro-7-670x645.jpg",
+  },
+  {
+    id: uuidv4(),
+    image: faker.image.nightlife(),
+    personName: faker.name.firstName(),
+    offerURL:
+      "https://images-eu.ssl-images-amazon.com/images/G/31/img20/TVs/Redmi/saleHDFC/staytuned/670x645.jpg",
+  },
+  {
+    id: uuidv4(),
+    image: faker.image.business(),
+    personName: faker.name.firstName(),
+    offerURL:
+      "https://images-eu.ssl-images-amazon.com/images/G/31/img20/CEPC/Wearables/OnePlus/Watch/Ingress/Price/onepluse_smarteverywere_670x645.jpg",
+  },
+  {
+    id: uuidv4(),
+    image: faker.image.people(),
+    personName: faker.name.firstName(),
+    offerURL:
+      "https://images-eu.ssl-images-amazon.com/images/G/31/img20/PC/Networking/Category/Tp_Link_670x645.jpg",
+  },
+  {
+    id: uuidv4(),
+    image: faker.image.city(),
+    personName: faker.name.firstName(),
+    offerURL:
+      "https://images-eu.ssl-images-amazon.com/images/G/31/img21/Laptops/Microsoft/Surface-Pro-7-670x645.jpg",
+  },
+  {
+    id: uuidv4(),
+    image: faker.image.nightlife(),
+    personName: faker.name.firstName(),
+    offerURL:
+      "https://images-eu.ssl-images-amazon.com/images/G/31/img20/TVs/Redmi/saleHDFC/staytuned/670x645.jpg",
   },
 ];

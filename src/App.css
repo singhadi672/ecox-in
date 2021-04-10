@@ -19,10 +19,10 @@ body {
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
-  background: white;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #202020;
+  background: transparent;
   border-radius: 5px;
 }
