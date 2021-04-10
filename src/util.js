@@ -6,3 +6,7 @@ export function ratingGenerator(rating) {
 
   return ratingArray;
 }
+
+export function findItemById(product, state) {
+  return !!state.find((item) => item.id === product.id);
+}

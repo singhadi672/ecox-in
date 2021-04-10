@@ -7,8 +7,11 @@ import {
   faHeart,
   faShoppingCart,
 } from "@fortawesome/free-solid-svg-icons";
+import { NavLink } from "react-router-dom";
+import { useProducts } from "../../contexts/useProducts";
 
 export function Nav() {
+  const { state } = useProducts();
   return (
     <nav className="nav-main">
       <div className="nav-logo">
@@ -28,14 +31,22 @@ export function Nav() {
         </button>
       </div>
       <div className="other-options">
-        <button className="options-btn">
-          <FontAwesomeIcon icon={faHeart} size="lg" />
-          <sup className="item-notification">0</sup>
-        </button>
-        <button className="options-btn">
-          <FontAwesomeIcon icon={faShoppingCart} size="lg" />
-          <sup className="item-notification">0</sup>
-        </button>
+        <NavLink to="/wishlist">
+          <button className="options-btn">
+            <FontAwesomeIcon icon={faHeart} size="lg" />
+            {state.wishlist.length > 0 && (
+              <sup className="item-notification">{state.wishlist.length}</sup>
+            )}
+          </button>
+        </NavLink>
+        <NavLink to="/cart">
+          <button className="options-btn">
+            <FontAwesomeIcon icon={faShoppingCart} size="lg" />
+            {state.cartItems.length > 0 && (
+              <sup className="item-notification">{state.cartItems.length}</sup>
+            )}
+          </button>
+        </NavLink>
         <button className="sign-in-btn">Sign In</button>
       </div>
     </nav>

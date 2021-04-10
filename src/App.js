@@ -1,16 +1,23 @@
 import "./App.css";
 import React from "react";
-import { useProducts } from "./contexts/products-context";
 import { Nav } from "./components/Nav/Nav";
 import { Products } from "./components/Products/Products";
+import { Cart } from "./components/Cart/Cart";
+import { Wishlist } from "./components/Wishlist/Wishlist";
+import { Home } from "./components/Home/Home";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
-  const { productsData } = useProducts();
   return (
     <div className="App">
       <Nav />
       <div className="content">
-        <Products />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/products" element={<Products />}></Route>
+          <Route path="cart" element={<Cart />}></Route>
+          <Route path="wishlist" element={<Wishlist />}></Route>
+        </Routes>
       </div>
     </div>
   );

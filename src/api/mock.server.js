@@ -20,6 +20,7 @@ export default function createMockServer() {
         server.create("product", {
           id: faker.datatype.uuid(),
           name: faker.commerce.productName(),
+          description: faker.lorem.sentences(),
           image: faker.random.image(),
           price: faker.commerce.price(),
           material: faker.commerce.productMaterial(),
@@ -29,19 +30,12 @@ export default function createMockServer() {
           fastDelivery: faker.datatype.boolean(),
           ratings: faker.random.arrayElement([1, 2, 3, 4, 5]),
           offer: faker.random.arrayElement(["Save 50", "70% bonanza", "Prime"]),
-          idealFor: faker.random.arrayElement([
-            "Men",
-            "Women",
-            "Girl",
-            "Boy",
-            "Senior",
-          ]),
-          level: faker.random.arrayElement([
-            "beginner",
-            "amateur",
-            "intermediate",
-            "advanced",
-            "professional",
+          productCategory: faker.random.arrayElement([
+            "tent",
+            "bags",
+            "shoes",
+            "ropes",
+            "jackets",
           ]),
           color: faker.commerce.color(),
         });

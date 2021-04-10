@@ -9,9 +9,20 @@
 }
 
 body {
-  background: #f9fafb;
+  background: #eeeff0;
 }
 
 .content {
   margin: 4rem 1rem 1rem 1rem;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #202020;
+  border-radius: 5px;
 }

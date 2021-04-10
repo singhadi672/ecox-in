@@ -1,0 +1,72 @@
+.side-menu {
+  position: fixed;
+  background: white;
+  width: 22%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.sidemenu-heading {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid rgb(235, 232, 232);
+  padding-bottom: 1rem;
+}
+
+.sort-option {
+  display: flex;
+  flex-direction: column;
+  height: 7rem;
+  justify-content: space-evenly;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgb(235, 232, 232);
+}
+
+.sort-option > div {
+  width: 7rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-range {
+  display: flex;
+  flex-direction: column;
+  height: 7rem;
+  justify-content: space-evenly;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgb(235, 232, 232);
+}
+
+.price-range > div > input {
+  width: 100%;
+}
+
+input {
+  cursor: pointer;
+}
+
+.other-filter {
+  display: flex;
+  flex-direction: column;
+  height: 8rem;
+  justify-content: space-evenly;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgb(235, 232, 232);
+}
+
+.other-filter > div > label {
+  margin-left: 1rem;
+}
+
+.range-value {
+  color: grey;
+  width: 100%;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+}

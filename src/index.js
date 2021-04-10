@@ -3,12 +3,15 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import createMockServer from "./api/mock.server";
 import { ProductsProvider } from "./contexts/products-context";
+import { BrowserRouter as Router } from "react-router-dom";
 
 createMockServer();
 ReactDOM.render(
   <React.StrictMode>
     <ProductsProvider>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </ProductsProvider>
   </React.StrictMode>,
   document.getElementById("root")
