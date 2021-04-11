@@ -41,7 +41,7 @@ export function Products() {
       <div className="products-side-menu">
         <SideMenu />
       </div>
-      <div className="produts-all">
+      <div className="products-all">
         <div className="product-category">
           <button
             onClick={() => navigate("../products")}

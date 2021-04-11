@@ -11,6 +11,7 @@ export const ProductsContext = createContext();
 
 export function ProductsProvider({ children }) {
   const [productsData, setProductsData] = useState([]);
+  const [sideMenuStatus, setSideMenuStatus] = useState(false);
   const [state, dispatch] = useReducer(cartReducer, {
     cartItems: [],
     wishlist: [],
@@ -53,7 +54,15 @@ export function ProductsProvider({ children }) {
   const filteredData = filterData(sortedData, state);
 
   return (
-    <ProductsContext.Provider value={{ filteredData, state, dispatch }}>
+    <ProductsContext.Provider
+      value={{
+        filteredData,
+        state,
+        dispatch,
+        sideMenuStatus,
+        setSideMenuStatus,
+      }}
+    >
       {children}
     </ProductsContext.Provider>
   );

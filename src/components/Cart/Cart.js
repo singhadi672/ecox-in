@@ -16,6 +16,14 @@ export function Cart() {
       {cartItems.length > 0 ? (
         <div className="cart">
           <div className="cart-items">
+            <div>
+              <button
+                className="cart-clear-btn"
+                onClick={() => dispatch({ type: "CLEAR_CART" })}
+              >
+                Clear All
+              </button>
+            </div>
             {cartItems.map((item) => (
               <div className="cart-item">
                 <img src={item.image} alt="" />
@@ -62,14 +70,6 @@ export function Cart() {
                 />
               </div>
             ))}
-            <div>
-              <button
-                className="cart-clear-btn"
-                onClick={() => dispatch({ type: "CLEAR_CART" })}
-              >
-                Clear All
-              </button>
-            </div>
           </div>
           <div className="price-details">
             <h1>PRICE DETAILS</h1>

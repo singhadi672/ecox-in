@@ -27,7 +27,7 @@ export function ProductDetails() {
         <div className="product-detail-desc">
           <h2>{product.name}</h2>
           <h4>By {product.brand}</h4>
-          <p>
+          <p className="product-description">
             <span className="desc-heading">Description:</span>{" "}
             {product.description}
           </p>
@@ -54,9 +54,7 @@ export function ProductDetails() {
             <button
               onClick={() => handleCartAdd(product, state)}
               className={
-                product.inStock
-                  ? "detail-btn-active"
-                  : "detail-btn-inactive"
+                product.inStock ? "detail-btn-active" : "detail-btn-inactive"
               }
             >
               {product.inStock
@@ -71,7 +69,7 @@ export function ProductDetails() {
               }}
               className="detail-back-btn"
             >
-              Back To Products
+              Back 
             </button>
           </div>
         </div>

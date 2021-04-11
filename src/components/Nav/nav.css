@@ -67,6 +67,7 @@
   color: white;
   font-size: 1rem;
   padding: 0.3rem;
+  cursor: pointer;
 }
 
 .item-notification {
@@ -100,13 +101,7 @@
 
 .nav-side-menu-mobile {
   color: white;
-  display: none;
-}
-
-@media screen and (max-width: 1208px) {
-  .nav-side-menu-mobile {
-    display: initial;
-  }
+  cursor: pointer;
 }
 
 @media screen and (max-width: 995px) {

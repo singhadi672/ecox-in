@@ -8,20 +8,28 @@ import {
   faShoppingCart,
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useProducts } from "../../contexts/useProducts";
 
 export function Nav() {
-  const { state } = useProducts();
+  const { state, sideMenustatus, setSideMenuStatus } = useProducts();
+  let navigate = useNavigate();
   return (
     <nav className="nav-main">
       <div className="nav-section-top">
         <div className="nav-logo">
           <div className="nav-side-menu-mobile">
-            <FontAwesomeIcon icon={faBars} />
+            <FontAwesomeIcon
+              icon={faBars}
+              onClick={() =>
+                setSideMenuStatus((sideMenuStatus) => !sideMenuStatus)
+              }
+            />
           </div>
           <img src={img} alt="logo-img" />
-          <h1>Ecox.in</h1>
+          <h1 onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
+            Ecox.in
+          </h1>
         </div>
         <div className="other-options-mobile">
           <NavLink to="/wishlist">

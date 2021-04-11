@@ -1,11 +1,16 @@
 .side-menu {
   position: fixed;
   background: white;
-  width: 17%;
+  width: 20rem;
   height: 100%;
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  z-index: 2;
+  box-shadow: 15px 15px 150px rgb(17, 16, 16);
+  transition: all 0.5s ease-in-out;
+  top: 3.5rem;
+  left: 0;
 }
 
 .sidemenu-heading {
@@ -71,8 +76,8 @@ input {
   justify-content: space-between;
 }
 
-@media screen and (max-width: 1208px){
-  .side-menu{
-    transform: translateX(-300px);
+@media screen and (max-width: 995px) {
+  .side-menu {
+    top: 4.5rem;
   }
 }

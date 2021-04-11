@@ -1,6 +1,6 @@
 .products-main {
   display: grid;
-  grid-template-columns: 0.2fr 1fr;
+  grid-template-columns: 1fr;
   column-gap: 2rem;
 }
 
@@ -9,7 +9,10 @@
 }
 
 .products-all {
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 .products {
   display: grid;
@@ -18,7 +21,7 @@
   row-gap: 2rem;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 80%;
 }
 
 .product-card {
@@ -163,7 +166,7 @@
   background: #ee5972;
 }
 
-@media screen and (max-width: 1208px) {
+@media screen and (max-width: 1291px) {
   .products {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
