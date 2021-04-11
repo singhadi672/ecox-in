@@ -140,6 +140,7 @@
   justify-content: space-evenly;
   white-space: nowrap;
   overflow-x: auto;
+  flex-wrap: wrap;
 }
 
 .category-btn {
