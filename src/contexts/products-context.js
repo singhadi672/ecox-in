@@ -17,7 +17,7 @@ export function ProductsProvider({ children }) {
     sortOption: null,
     priceRange: 1000,
     deliveryOption: false,
-    inStock: null,
+    inStock: false,
   });
   useEffect(() => {
     (async () => {

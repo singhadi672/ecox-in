@@ -3,6 +3,12 @@ import { v4 as uuidv4 } from "uuid";
 
 export const category = [
   {
+    categoryName: "All Products",
+    image:
+      "https://sm.mashable.com/t/mashable_in/news/h/here-are-a/here-are-all-the-products-amazon-announced-at-its-hardware-e_eyz9.960.png",
+    applink: "/products",
+  },
+  {
     categoryName: "Tents",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeInX0AwaYVfajSRrKtJNr37s5y7qsWX4kRg&usqp=CAU",
@@ -31,6 +37,12 @@ export const category = [
     image:
       "https://i.pinimg.com/originals/65/b0/d1/65b0d1415be93b4da925a2fa5967fb46.png",
     applink: "/products?category=jackets",
+  },
+  {
+    categoryName: "Gloves",
+    image:
+      "https://i.pinimg.com/originals/90/3d/9d/903d9df97b3adcc1d45a6ca0a16651b2.png",
+    applink: "/products?category=gloves",
   },
 ];
 

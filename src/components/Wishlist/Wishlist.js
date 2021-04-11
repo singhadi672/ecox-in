@@ -5,6 +5,7 @@ import { useProducts } from "../../contexts/useProducts";
 import "../Products/products.css";
 import { ratingGenerator } from "../../util";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import "./wishlist.css";
 
 export function Wishlist() {
   const { dispatch, state } = useProducts();
@@ -16,73 +17,86 @@ export function Wishlist() {
   }
 
   return (
-    <div className="products">
-      {state.wishlist.map((product) => (
-        <div className="product-card">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="product-image"
-          />
-          <div className="product-details">
-            <div className="product-details-top">
-              <div>
-                <p className="product-offer">{product.offer}</p>
-              </div>
-              <button
-                className="wishlist-btn"
-                onClick={() =>
-                  dispatch({ type: "REMOVE_ITEM_FROM_WISHLIST", product })
-                }
-              >
-                <FontAwesomeIcon icon={faTimes} size="lg" />
-              </button>
-            </div>
-            <div className="product-details-bottom">
-              <h2>{product.name}</h2>
-              <h4>{product.brand}</h4>
-              <div className="product-price-rating">
-                <div className="product-rating">
-                  {ratingGenerator(product["ratings"]).map((rating) => (
-                    <FontAwesomeIcon
-                      icon={faStar}
-                      style={{ color: "rgb(247, 168, 22)" }}
-                    />
-                  ))}
+    <>
+      <h1 className="wishlist-heading">My Wishlist</h1>
+      {state.wishlist.length > 0 ? (
+        <div className="wishlist">
+          {state.wishlist.map((product) => (
+            <div className="product-card">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="product-image"
+              />
+              <div className="product-details">
+                <div className="product-details-top">
+                  <div>
+                    <p className="product-offer">{product.offer}</p>
+                  </div>
+                  <button
+                    className="wishlist-btn"
+                    onClick={() =>
+                      dispatch({ type: "REMOVE_ITEM_FROM_WISHLIST", product })
+                    }
+                  >
+                    <FontAwesomeIcon icon={faTimes} size="lg" />
+                  </button>
                 </div>
-                <div className="product-price">
-                  <p>$ {product.price}</p>
+                <div className="product-details-bottom">
+                  <h2>{product.name}</h2>
+                  <h4>{product.brand}</h4>
+                  <div className="product-price-rating">
+                    <div className="product-rating">
+                      {ratingGenerator(product["ratings"]).map((rating) => (
+                        <FontAwesomeIcon
+                          icon={faStar}
+                          style={{ color: "rgb(247, 168, 22)" }}
+                        />
+                      ))}
+                    </div>
+                    <div className="product-price">
+                      <p>$ {product.price}</p>
+                    </div>
+                  </div>
+                  {product.inStock ? (
+                    <p style={{ color: "#1DB954" }}>IN STOCK</p>
+                  ) : (
+                    <p style={{ color: "tomato" }}>OUT OF STOCK</p>
+                  )}
+                  {product.fastDelivery ? (
+                    <small>(Xpress delivery)</small>
+                  ) : (
+                    <small>(standard delivery)</small>
+                  )}
+                  <div className="product-buy">
+                    <button
+                      className={
+                        product.inStock
+                          ? "product-buy-btn btn-active"
+                          : "product-buy-btn btn-inactive"
+                      }
+                      onClick={() => handleCartAdd(product, state)}
+                    >
+                      {product.inStock ? "Move to cart" : "Out of stock"}
+                    </button>
+                    <button className="product-buy-btn btn-active">
+                      Product details
+                    </button>
+                  </div>
                 </div>
               </div>
-              {product.inStock ? (
-                <p style={{ color: "#1DB954" }}>IN STOCK</p>
-              ) : (
-                <p style={{ color: "tomato" }}>OUT OF STOCK</p>
-              )}
-              {product.fastDelivery ? (
-                <small>(Xpress delivery)</small>
-              ) : (
-                <small>(standard delivery)</small>
-              )}
-              <div className="product-buy">
-                <button
-                  className={
-                    product.inStock
-                      ? "product-buy-btn btn-active"
-                      : "product-buy-btn btn-inactive"
-                  }
-                  onClick={() => handleCartAdd(product, state)}
-                >
-                  {product.inStock ? "Move to cart" : "Out of stock"}
-                </button>
-                <button className="product-buy-btn btn-active">
-                  Product details
-                </button>
-              </div>
             </div>
-          </div>
+          ))}
         </div>
-      ))}
-    </div>
+      ) : (
+        <div className="cart-empty">
+          <img
+            src="https://danapointjewelers.com/assets/images/empty-wishlist.png"
+            alt=""
+          />
+          <h2>"Wishlist is Empty"</h2>
+        </div>
+      )}
+    </>
   );
 }

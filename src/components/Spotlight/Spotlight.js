@@ -6,8 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 export function Spotlight({ setSpotlightWindow, spotlightWindow }) {
-  //   console.log(timeoutID);
-
   useEffect(() => {
     const timeoutID = setTimeout(() => {
       setSpotlightWindow((spotlightWindow) => ({
@@ -28,13 +26,12 @@ export function Spotlight({ setSpotlightWindow, spotlightWindow }) {
           axis="vertical"
           showThumbs={false}
           showArrows={false}
-          width="40rem"
-          style={{ height: "40rem" }}
+          className="carousel-container"
         >
           <img
             src={spotlightWindow.offerURL}
             alt=""
-            style={{ height: "40rem", width: "100%" }}
+            className="spotlight-reel-img"
           />
         </Carousel>
         <FontAwesomeIcon

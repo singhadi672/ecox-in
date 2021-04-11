@@ -11,88 +11,101 @@ export function Cart() {
     return (acc += parseFloat(value.price * value.quantity));
   }
   return (
-    <div className="cart">
-      <div className="cart-items">
-        {cartItems.map((item) => (
-          <div className="cart-item">
-            <img src={item.image} alt="" />
-            <div className="cart-item-desc">
-              <h2>
-                {item.name}({item.color})
-              </h2>
-              <h5>{item.brand}</h5>
-              <h3>$ {item.price}</h3>
-              <div className="cart-item-quantity">
-                <button
-                  class="item-quantity-btn"
+    <>
+      <h1 className="cart-heading">My Cart</h1>
+      {cartItems.length > 0 ? (
+        <div className="cart">
+          <div className="cart-items">
+            {cartItems.map((item) => (
+              <div className="cart-item">
+                <img src={item.image} alt="" />
+                <div className="cart-item-desc">
+                  <h2>
+                    {item.name}({item.color})
+                  </h2>
+                  <h5>{item.brand}</h5>
+                  <h3>$ {item.price}</h3>
+                  <div className="cart-item-quantity">
+                    <button
+                      class="item-quantity-btn"
+                      onClick={() =>
+                        dispatch({
+                          type: "QUANTITY_DEC",
+                          product: item,
+                          payload: 1,
+                        })
+                      }
+                    >
+                      –
+                    </button>
+                    <span>{item.quantity}</span>
+                    <button
+                      class="item-quantity-btn"
+                      onClick={() =>
+                        dispatch({
+                          type: "QUANTITY_INC",
+                          product: item,
+                          payload: 1,
+                        })
+                      }
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                <FontAwesomeIcon
+                  icon={faTrash}
+                  className="cart-item-delete"
                   onClick={() =>
-                    dispatch({
-                      type: "QUANTITY_DEC",
-                      product: item,
-                      payload: 1,
-                    })
+                    dispatch({ type: "REMOVE_ITEM_FROM_CART", product: item })
                   }
-                >
-                  –
-                </button>
-                {item.quantity}
-                <button
-                  class="item-quantity-btn"
-                  onClick={() =>
-                    dispatch({
-                      type: "QUANTITY_INC",
-                      product: item,
-                      payload: 1,
-                    })
-                  }
-                >
-                  +
-                </button>
+                />
               </div>
+            ))}
+            <div>
+              <button
+                className="cart-clear-btn"
+                onClick={() => dispatch({ type: "CLEAR_CART" })}
+              >
+                Clear All
+              </button>
             </div>
-            <FontAwesomeIcon
-              icon={faTrash}
-              className="cart-item-delete"
-              onClick={() =>
-                dispatch({ type: "REMOVE_ITEM_FROM_CART", product: item })
-              }
-            />
           </div>
-        ))}
-        <div>
-          <button
-            className="cart-clear-btn"
-            onClick={() => dispatch({ type: "CLEAR_CART" })}
-          >
-            Clear All
-          </button>
+          <div className="price-details">
+            <h1>PRICE DETAILS</h1>
+            <div className="cart-total section">
+              <p>Total MRP</p>
+              <p className="value">
+                {" "}
+                ${state.cartItems.reduce(calculateTotal, 0).toFixed(2)}
+              </p>
+            </div>
+            <div className="cart-total section">
+              <p>Delivery Charges</p>
+              <p className="value free">FREE</p>
+            </div>
+            <hr className="section" />
+            <div className="cart-total">
+              <p>Total Amount</p>
+              <p className="value">
+                {" "}
+                ${state.cartItems.reduce(calculateTotal, 0).toFixed(2)}
+              </p>
+            </div>
+            <div className="cart-total buy-btn">
+              <button>Checkout</button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="price-details">
-        <h1>PRICE DETAILS</h1>
-        <div className="cart-total">
-          <p>Total MRP</p>
-          <p className="value">
-            {" "}
-            ${state.cartItems.reduce(calculateTotal, 0).toFixed(2)}
-          </p>
+      ) : (
+        <div className="cart-empty">
+          <img
+            src="https://rukminim1.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90"
+            alt=""
+          />
+          <h2>"Cart is Empty"</h2>
         </div>
-        <div className="cart-total">
-          <p>Delivery Charges</p>
-          <p className="value free">FREE</p>
-        </div>
-        <hr />
-        <div className="cart-total">
-          <p>Total Amount</p>
-          <p className="value">
-            {" "}
-            ${state.cartItems.reduce(calculateTotal, 0).toFixed(2)}
-          </p>
-        </div>
-        <div className="cart-total buy-btn">
-          <button>Checkout</button>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }

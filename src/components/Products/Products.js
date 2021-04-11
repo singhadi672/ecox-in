@@ -38,10 +38,10 @@ export function Products() {
   const finalData = filterCategory(value);
   return (
     <div className="products-main">
-      <div>
+      <div className="products-side-menu">
         <SideMenu />
       </div>
-      <div>
+      <div className="produts-all">
         <div className="product-category">
           <button
             onClick={() => navigate("../products")}
@@ -88,6 +88,14 @@ export function Products() {
             }
           >
             Jackets
+          </button>
+          <button
+            onClick={() => navigate("../products?category=gloves")}
+            className={
+              value === "gloves" ? "category-btn-active" : "category-btn"
+            }
+          >
+            Gloves
           </button>
         </div>
         <div className="products">
@@ -158,8 +166,11 @@ export function Products() {
                           : "Add to cart"
                         : "Out of stock"}
                     </button>
-                    <button className="product-buy-btn btn-active">
-                      Product details
+                    <button
+                      className="product-buy-btn btn-active"
+                      onClick={() => navigate(`/products/${product.id}`)}
+                    >
+                      Details
                     </button>
                   </div>
                 </div>

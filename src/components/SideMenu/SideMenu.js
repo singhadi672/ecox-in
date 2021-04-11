@@ -92,7 +92,7 @@ export function SideMenu() {
             type="checkbox"
             name="outofstock"
             id=""
-            checked={state.instock}
+            checked={state.inStock}
             onChange={() =>
               dispatch({
                 type: "TOGGLE_INSTOCK_OPTION",

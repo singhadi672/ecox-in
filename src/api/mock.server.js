@@ -12,11 +12,11 @@ export default function createMockServer() {
     },
     routes() {
       this.namespace = "api";
-      this.timing = 1000;
+      this.timing = 3000;
       this.resource("products");
     },
     seeds(server) {
-      [...Array(5)].forEach((_) => {
+      [...Array(60)].forEach((_) => {
         server.create("product", {
           id: faker.datatype.uuid(),
           name: faker.commerce.productName(),
@@ -36,6 +36,7 @@ export default function createMockServer() {
             "shoes",
             "ropes",
             "jackets",
+            "gloves",
           ]),
           color: faker.commerce.color(),
         });

@@ -67,10 +67,28 @@ export function Home() {
           >
             {carouselImages.map((item) => (
               <div>
-                <img src={item} alt="carousel image" />
+                <img
+                  className="carousel-image"
+                  src={item}
+                  alt="carousel image"
+                />
               </div>
             ))}
           </Carousel>
+        </div>
+        <div className="home-categories">
+          {category.map((item) => (
+            <div className="home-category">
+              <img
+                src={item.image}
+                alt=""
+                onClick={() => navigate(item.applink)}
+              />
+              <div className="category-desc">
+                <h2>{item.categoryName}</h2>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
       {spotlightWindow.status && (
