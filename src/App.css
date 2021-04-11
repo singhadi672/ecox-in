@@ -29,6 +29,6 @@ body {
 
 @media screen and (max-width: 700px) {
   .content {
-    margin: 4rem 0rem 1rem 0rem;
+    margin: 4rem 0.5rem 1rem 0.5rem;
   }
 }
