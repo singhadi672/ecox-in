@@ -47,7 +47,7 @@ export function Products() {
             onClick={() => navigate("../products")}
             className={value === null ? "category-btn-active" : "category-btn"}
           >
-            All Products
+            All
           </button>
           <button
             onClick={() => navigate("../products?category=tent")}
