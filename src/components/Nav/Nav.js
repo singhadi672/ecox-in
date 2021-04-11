@@ -6,6 +6,7 @@ import {
   faSearch,
   faHeart,
   faShoppingCart,
+  faBars,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { useProducts } from "../../contexts/useProducts";
@@ -14,9 +15,35 @@ export function Nav() {
   const { state } = useProducts();
   return (
     <nav className="nav-main">
-      <div className="nav-logo">
-        <img src={img} alt="logo-img" />
-        <h1>Ecox.in</h1>
+      <div className="nav-section-top">
+        <div className="nav-logo">
+          <div className="nav-side-menu-mobile">
+            <FontAwesomeIcon icon={faBars} />
+          </div>
+          <img src={img} alt="logo-img" />
+          <h1>Ecox.in</h1>
+        </div>
+        <div className="other-options-mobile">
+          <NavLink to="/wishlist">
+            <button className="options-btn">
+              <FontAwesomeIcon icon={faHeart} size="lg" />
+              {state.wishlist.length > 0 && (
+                <sup className="item-notification">{state.wishlist.length}</sup>
+              )}
+            </button>
+          </NavLink>
+          <NavLink to="/cart">
+            <button className="options-btn">
+              <FontAwesomeIcon icon={faShoppingCart} size="lg" />
+              {state.cartItems.length > 0 && (
+                <sup className="item-notification">
+                  {state.cartItems.length}
+                </sup>
+              )}
+            </button>
+          </NavLink>
+          <button className="sign-in-btn">Sign In</button>
+        </div>
       </div>
       <div className="nav-search">
         <input
