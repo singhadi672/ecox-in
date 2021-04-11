@@ -141,6 +141,7 @@
   .spotlight-item > div > img {
     left: 2px;
     top: 2px;
+    border: 3px solid #eeeff0;
   }
 
   .carousel-image {
