@@ -83,9 +83,7 @@
 }
 
 @media screen and (max-width: 1253px) {
-  .product-detail {
-    /* flex-direction: column; */
-  }
+
 
   .product-detail-img {
     width: 40%;
