@@ -55,6 +55,10 @@
   cursor: pointer;
 }
 
+.quantity-inactive{
+  pointer-events: none;
+  opacity: 0.6;
+}
 .cart-clear-btn {
   margin: 1rem;
   padding: 0.5rem 1.5rem;

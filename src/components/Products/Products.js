@@ -1,20 +1,27 @@
-import {
-  faStar,
-  faHeart as heartFull,
-} from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useState } from "react";
 import { useProducts } from "../../contexts/useProducts";
 import "./products.css";
-import { ratingGenerator, findItemById } from "../../util";
+import { ratingGenerator } from "../../util";
 import { SideMenu } from "../SideMenu/SideMenu";
-import { faHeart as heartEmpty } from "@fortawesome/free-regular-svg-icons";
+
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { AddToCartButton } from "./AddToCartButton";
+import { AddToWishlistButton } from "./AddToWishlistButton";
+import { Toast } from "../Toast/Toast";
 
 export function Products() {
   const { filteredData, dispatch, state } = useProducts();
   const query = new URLSearchParams(useLocation().search);
   const value = query.get("category");
+  const [toast, setToast] = useState({
+    status: false,
+    heading: "",
+    msg: "",
+    error: false,
+  });
 
   function filterCategory(value) {
     return value
@@ -22,16 +29,134 @@ export function Products() {
       : filteredData;
   }
 
-  function handleCartAdd(product, state) {
-    return !!state.cartItems.find((item) => item.id === product.id)
-      ? dispatch({ type: "REMOVE_ITEM_FROM_CART", product })
-      : dispatch({ type: "ADD_PRODUCT_TO_CART", product });
+  async function handleCartAdd(product, state, setCartLoader) {
+    const isProduct = !!state.cartItems.find(
+      (item) => item.product._id === product._id
+    );
+    if (isProduct) {
+      try {
+        setCartLoader((loader) => true);
+        setToast({ ...toast, status: false, error: false });
+        const response = await axios.delete(
+          "https://damp-mesa-30814.herokuapp.com/cart",
+          { data: { productId: product._id } }
+        );
+        if (response.data.success) {
+          setToast({
+            ...toast,
+            status: true,
+            heading: "Item Removed!",
+            msg: `${product.name} is removed from the cart`,
+          });
+          dispatch({ type: "REMOVE_ITEM_FROM_CART", product });
+          setCartLoader((loader) => false);
+        }
+      } catch (err) {
+        console.log(err);
+        setToast({
+          ...toast,
+          status: true,
+          heading: "Error occured",
+          msg: `not able to reach the server please try again later`,
+          error: true,
+        });
+        setCartLoader((loader) => false);
+      }
+    } else {
+      try {
+        setToast({ ...toast, status: false, error: false });
+        setCartLoader(true);
+        const response = await axios.post(
+          "https://damp-mesa-30814.herokuapp.com/cart",
+          { productId: product._id }
+        );
+        if (response.data.success) {
+          setToast({
+            ...toast,
+            status: true,
+            heading: "Item Added!",
+            msg: `${product.name} is added to the cart`,
+          });
+          dispatch({ type: "ADD_PRODUCT_TO_CART", product });
+          setCartLoader(false);
+        }
+      } catch (err) {
+        console.log(err);
+        setToast({
+          ...toast,
+          status: true,
+          heading: "Error occured",
+          msg: `not able to reach the server please try again later`,
+          error: true,
+        });
+        setCartLoader(false);
+      }
+    }
   }
 
-  function handleWishlistAdd(product, state) {
-    return !!state.wishlist.find((item) => item.id === product.id)
-      ? dispatch({ type: "REMOVE_ITEM_FROM_WISHLIST", product })
-      : dispatch({ type: "ADD_PRODUCT_TO_WISHLIST", product });
+  async function handleWishlistAdd(product, state, setWishlistLoader) {
+    const isProduct = !!state.wishlist.find(
+      (item) => item.product._id === product._id
+    );
+    if (isProduct) {
+      try {
+        setToast({ ...toast, status: false, error: false });
+        setWishlistLoader(true);
+        const response = await axios.delete(
+          "https://damp-mesa-30814.herokuapp.com/wishlist",
+          { data: { productId: product._id } }
+        );
+        if (response.data.success) {
+          setToast({
+            ...toast,
+            status: true,
+            heading: "Item removed from Wishlist!",
+            msg: `${product.name} is removed from wishlist`,
+          });
+          dispatch({ type: "REMOVE_ITEM_FROM_WISHLIST", product });
+          setWishlistLoader(false);
+        }
+      } catch (err) {
+        console.log(err);
+        setToast({
+          ...toast,
+          status: true,
+          heading: "Error occured",
+          msg: `not able to reach the server please try again later`,
+          error: true,
+        });
+        setWishlistLoader(false);
+      }
+    } else {
+      try {
+        setToast({ ...toast, status: false, error: false });
+        setWishlistLoader(true);
+        const response = await axios.post(
+          "https://damp-mesa-30814.herokuapp.com/wishlist",
+          { productId: product._id }
+        );
+        if (response.data.success) {
+          setToast({
+            ...toast,
+            status: true,
+            heading: "Item Wishlisted!",
+            msg: `${product.name} is added to wishlist`,
+          });
+          dispatch({ type: "ADD_PRODUCT_TO_WISHLIST", product });
+          setWishlistLoader(false);
+        }
+      } catch (err) {
+        console.log(err);
+        setToast({
+          ...toast,
+          status: true,
+          heading: "Error occured",
+          msg: `not able to reach the server please try again later`,
+          error: true,
+        });
+        setWishlistLoader(false);
+      }
+    }
   }
 
   let navigate = useNavigate();
@@ -111,19 +236,11 @@ export function Products() {
                   <div>
                     <p className="product-offer">{product.offer}</p>
                   </div>
-                  <button
-                    className="wishlist-btn"
-                    onClick={() => handleWishlistAdd(product, state)}
-                  >
-                    <FontAwesomeIcon
-                      icon={
-                        findItemById(product, state.wishlist)
-                          ? heartFull
-                          : heartEmpty
-                      }
-                      size="lg"
-                    />
-                  </button>
+                  <AddToWishlistButton
+                    state={state}
+                    product={product}
+                    handleWishlistAdd={handleWishlistAdd}
+                  />
                 </div>
                 <div className="product-details-bottom">
                   <h2>{product.name}</h2>
@@ -152,23 +269,14 @@ export function Products() {
                     <small>(standard delivery)</small>
                   )}
                   <div className="product-buy">
-                    <button
-                      className={
-                        product.inStock
-                          ? "product-buy-btn btn-active"
-                          : "product-buy-btn btn-inactive"
-                      }
-                      onClick={() => handleCartAdd(product, state)}
-                    >
-                      {product.inStock
-                        ? findItemById(product, state.cartItems)
-                          ? "Remove from cart"
-                          : "Add to cart"
-                        : "Out of stock"}
-                    </button>
+                    <AddToCartButton
+                      state={state}
+                      product={product}
+                      handleCartAdd={handleCartAdd}
+                    />
                     <button
                       className="product-buy-btn btn-active"
-                      onClick={() => navigate(`/products/${product.id}`)}
+                      onClick={() => navigate(`/products/${product._id}`)}
                     >
                       Details
                     </button>
@@ -179,6 +287,7 @@ export function Products() {
           ))}
         </div>
       </div>
+      <Toast toast={toast} setToast={setToast} />
     </div>
   );
 }

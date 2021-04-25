@@ -22,10 +22,23 @@ export function ProductsProvider({ children }) {
   });
   useEffect(() => {
     (async () => {
-      const {
-        data: { products },
-      } = await axios.get("/api/products");
-      setProductsData(products);
+      try {
+        const {
+          data: { products },
+        } = await axios.get("https://damp-mesa-30814.herokuapp.com/products");
+        const {
+          data: { user },
+        } = await axios.get("https://damp-mesa-30814.herokuapp.com/user");
+        const cartData = user["0"].cart.cartItems;
+        const wishlistData = user["0"].wishlist.wishlistItems;
+        setProductsData(products === undefined ? [] : products);
+        dispatch({
+          type: "SET_CART_WISHLIST",
+          payload: { cartData, wishlistData },
+        });
+      } catch (err) {
+        console.log(err);
+      }
     })();
   }, []);
 

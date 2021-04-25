@@ -1,17 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import createMockServer from "./api/mock.server";
+// import createMockServer from "./api/mock.server";
 import { ProductsProvider } from "./contexts/products-context";
+import { HomeProvider } from "./contexts/home-context";
+
 import { BrowserRouter as Router } from "react-router-dom";
 
-createMockServer();
+// createMockServer();
 ReactDOM.render(
   <React.StrictMode>
     <ProductsProvider>
-      <Router>
-        <App />
-      </Router>
+      <HomeProvider>
+        <Router>
+          <App />
+        </Router>
+      </HomeProvider>
     </ProductsProvider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -8,5 +8,5 @@ export function ratingGenerator(rating) {
 }
 
 export function findItemById(product, state) {
-  return !!state.find((item) => item.id === product.id);
+  return !!state.find((item) => item.product._id === product._id);
 }

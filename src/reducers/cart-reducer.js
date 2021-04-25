@@ -1,37 +1,40 @@
 export function cartReducer(state, { type, product, payload }) {
   switch (type) {
+    case "SET_CART_WISHLIST":
+      return {
+        ...state,
+        cartItems: [...payload.cartData],
+        wishlist: [...payload.wishlistData],
+      };
     case "ADD_PRODUCT_TO_CART":
       return {
         ...state,
-        cartItems: [
-          ...state.cartItems,
-          { ...product, quantity: product.quantity + 1 },
-        ],
+        cartItems: [...state.cartItems, { product, quantity: 1 }],
       };
     case "ADD_PRODUCT_TO_WISHLIST":
       return {
         ...state,
-        wishlist: [...state.wishlist, product],
+        wishlist: [...state.wishlist, {product}],
       };
     case "QUANTITY_DEC":
       return product.quantity > 1
         ? {
             ...state,
             cartItems: state.cartItems.map((item) =>
-              product.id === item.id
+              product.product._id === item.product._id
                 ? { ...item, quantity: item.quantity - payload }
                 : item
             ),
           }
         : {
             ...state,
-            cartItems: state.cartItems.filter((item) => item.id !== product.id),
+            cartItems: state.cartItems.filter((item) => item.product._id !== product.product._id),
           };
     case "QUANTITY_INC":
       return {
         ...state,
         cartItems: state.cartItems.map((item) =>
-          product.id === item.id
+          product.product._id === item.product._id
             ? { ...item, quantity: item.quantity + payload }
             : item
         ),
@@ -39,12 +42,12 @@ export function cartReducer(state, { type, product, payload }) {
     case "REMOVE_ITEM_FROM_CART":
       return {
         ...state,
-        cartItems: state.cartItems.filter((item) => item.id !== product.id),
+        cartItems: state.cartItems.filter((item) => item.product._id !== product._id),
       };
     case "REMOVE_ITEM_FROM_WISHLIST":
       return {
         ...state,
-        wishlist: state.wishlist.filter((item) => item.id !== product.id),
+        wishlist: state.wishlist.filter((item) => item.product._id !== product._id),
       };
 
     case "CLEAR_CART":

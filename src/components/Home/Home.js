@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { category, carouselImages, spotlightData } from "../../api/homepageDB";
 import "./home.css";
 import { useNavigate } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -7,10 +6,12 @@ import { Carousel } from "react-responsive-carousel";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Spotlight } from "../Spotlight/Spotlight";
+import { useHome } from "../../contexts/home-context";
 
 export function Home() {
   let navigate = useNavigate();
   const inputref = useRef(null);
+  const { homeData } = useHome();
 
   const [spotlightWindow, setSpotlightWindow] = useState({
     status: false,
@@ -20,7 +21,7 @@ export function Home() {
     <>
       <div className="home-content">
         <div className="spotlight" ref={inputref}>
-          {spotlightData.map((item) => (
+          {homeData.spotlight.map((item) => (
             <li className="spotlight-list">
               <div className="spotlight-item">
                 <div className="img-cover">
@@ -65,7 +66,7 @@ export function Home() {
             infiniteLoop={true}
             interval={4000}
           >
-            {carouselImages.map((item) => (
+            {homeData.carousel.map((item) => (
               <div>
                 <img
                   className="carousel-image"
@@ -77,7 +78,7 @@ export function Home() {
           </Carousel>
         </div>
         <div className="home-categories">
-          {category.map((item) => (
+          {homeData.category.map((item) => (
             <div className="home-category">
               <img
                 src={item.image}

@@ -1,0 +1,23 @@
+.toast-success,
+.toast-failure {
+  width: 30%;
+  justify-self: center;
+  height: 15vh;
+  bottom: 1.5rem;
+  left: 35%;
+  font-size: 2rem;
+  position: fixed;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 5px 5px 50px 5px rgb(163, 161, 161);
+  background: linear-gradient(90deg, #213b21, #202020);
+}
+
+.toast-success-text > p {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.toast-active {
+  transform: translateY(10rem);
+  opacity: 0;
+}

@@ -17,11 +17,11 @@
 .products {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  column-gap: 1.5rem;
+  column-gap: 2.5rem;
   row-gap: 2rem;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 90%;
 }
 
 .product-card {
@@ -164,6 +164,10 @@
   color: white;
   font-size: 1rem;
   background: #ee5972;
+}
+
+#loader-active {
+  pointer-events: none;
 }
 
 @media screen and (max-width: 1291px) {
