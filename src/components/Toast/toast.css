@@ -21,3 +21,24 @@
   transform: translateY(10rem);
   opacity: 0;
 }
+
+@media screen and (max-width: 928px) {
+  .toast-success,
+  .toast-failure {
+    width: 50%;
+    left: 30%;
+  }
+}
+
+@media screen and (max-width: 592px) {
+  .toast-success,
+  .toast-failure {
+    width: 60%;
+    left: 20%;
+    font-size: 1rem;
+  }
+  .toast-success-text > p {
+    font-weight: 400;
+    font-size: 0.7rem;
+  }
+}
