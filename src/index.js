@@ -1,22 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-// import createMockServer from "./api/mock.server";
 import { ProductsProvider } from "./contexts/products-context";
 import { HomeProvider } from "./contexts/home-context";
+import { AuthProvider } from "./contexts/auth-context";
 
 import { BrowserRouter as Router } from "react-router-dom";
 
-// createMockServer();
 ReactDOM.render(
   <React.StrictMode>
-    <ProductsProvider>
-      <HomeProvider>
-        <Router>
-          <App />
-        </Router>
-      </HomeProvider>
-    </ProductsProvider>
+    <AuthProvider>
+      <ProductsProvider>
+        <HomeProvider>
+          <Router>
+            <App />
+          </Router>
+        </HomeProvider>
+      </ProductsProvider>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

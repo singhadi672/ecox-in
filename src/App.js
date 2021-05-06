@@ -7,7 +7,8 @@ import { Cart } from "./components/Cart/Cart";
 import { Wishlist } from "./components/Wishlist/Wishlist";
 import { Home } from "./components/Home/Home";
 import { ProductDetails } from "./components/ProductDetails/ProductDetails";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
+import { Login } from "./components/Login/Login";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/products/:id" element={<ProductDetails />}></Route>
           <Route path="cart" element={<Cart />}></Route>
           <Route path="wishlist" element={<Wishlist />}></Route>
+          <Route path="login" element={<Login />}></Route>
         </Routes>
       </div>
     </div>

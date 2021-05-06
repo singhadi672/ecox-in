@@ -19,7 +19,6 @@ export function Cart() {
   function calculateTotal(acc, value) {
     return (acc += parseInt(value.product.price * value.quantity));
   }
-  console.log(cartItems);
 
   async function toggleQuantity(item, type, setQuantityTab) {
     if (item.quantity < 2 && type === "dec") {

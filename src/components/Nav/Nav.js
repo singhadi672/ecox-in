@@ -8,12 +8,14 @@ import {
   faShoppingCart,
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useProducts } from "../../contexts/useProducts";
+import { useAuth } from "../../contexts/auth-context";
 
 export function Nav() {
   const { state, sideMenustatus, setSideMenuStatus } = useProducts();
   let navigate = useNavigate();
+  const states = useLocation();
   return (
     <nav className="nav-main">
       <div className="nav-section-top">
