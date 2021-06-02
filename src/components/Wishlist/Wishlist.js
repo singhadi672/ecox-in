@@ -21,9 +21,12 @@ export function Wishlist() {
       setToast({ ...toast, status: false, error: false });
       setCartLoader(true);
       try {
-        const response = await axios.post("http://localhost:4000/cart", {
-          productId: product._id,
-        });
+        const response = await axios.post(
+          "https://damp-mesa-30814.herokuapp.com/cart",
+          {
+            productId: product._id,
+          }
+        );
         if (response.data.success) {
           setToast({
             ...toast,
@@ -51,9 +54,12 @@ export function Wishlist() {
   async function handleWishlistAdd(product, state) {
     try {
       setToast({ ...toast, status: false, error: false });
-      const response = await axios.delete("http://localhost:4000/wishlist", {
-        data: { productId: product.product._id },
-      });
+      const response = await axios.delete(
+        "https://damp-mesa-30814.herokuapp.com/wishlist",
+        {
+          data: { productId: product.product._id },
+        }
+      );
       if (response.data.success) {
         setToast({
           ...toast,

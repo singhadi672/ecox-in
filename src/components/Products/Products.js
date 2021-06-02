@@ -40,9 +40,12 @@ export function Products() {
         try {
           setCartLoader((loader) => true);
           setToast({ ...toast, status: false, error: false });
-          const response = await axios.delete("http://localhost:4000/cart", {
-            data: { productId: product._id },
-          });
+          const response = await axios.delete(
+            "https://damp-mesa-30814.herokuapp.com/cart",
+            {
+              data: { productId: product._id },
+            }
+          );
           if (response.data.success) {
             setToast({
               ...toast,
@@ -68,9 +71,12 @@ export function Products() {
         try {
           setToast({ ...toast, status: false, error: false });
           setCartLoader(true);
-          const response = await axios.post("http://localhost:4000/cart", {
-            productId: product._id,
-          });
+          const response = await axios.post(
+            "https://damp-mesa-30814.herokuapp.com/cart",
+            {
+              productId: product._id,
+            }
+          );
           if (response.data.success) {
             setToast({
               ...toast,
@@ -108,7 +114,7 @@ export function Products() {
           setToast({ ...toast, status: false, error: false });
           setWishlistLoader(true);
           const response = await axios.delete(
-            "http://localhost:4000/wishlist",
+            "https://damp-mesa-30814.herokuapp.com/wishlist",
             {
               data: { productId: product._id },
             }
@@ -138,9 +144,12 @@ export function Products() {
         try {
           setToast({ ...toast, status: false, error: false });
           setWishlistLoader(true);
-          const response = await axios.post("http://localhost:4000/wishlist", {
-            productId: product._id,
-          });
+          const response = await axios.post(
+            "https://damp-mesa-30814.herokuapp.com/wishlist",
+            {
+              productId: product._id,
+            }
+          );
           if (response.data.success) {
             setToast({
               ...toast,
