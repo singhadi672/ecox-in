@@ -11,9 +11,11 @@ import axios from "axios";
 import { AddToCartButton } from "./AddToCartButton";
 import { AddToWishlistButton } from "./AddToWishlistButton";
 import { Toast } from "../Toast/Toast";
+import { useAuth } from "../../contexts/auth-context";
 
 export function Products() {
-  const { filteredData, dispatch, state } = useProducts();
+  const { filteredData } = useProducts();
+  const { dispatch, state, login } = useAuth();
   const query = new URLSearchParams(useLocation().search);
   const value = query.get("category");
   const [toast, setToast] = useState({
@@ -30,132 +32,139 @@ export function Products() {
   }
 
   async function handleCartAdd(product, state, setCartLoader) {
-    const isProduct = !!state.cartItems.find(
-      (item) => item.product._id === product._id
-    );
-    if (isProduct) {
-      try {
-        setCartLoader((loader) => true);
-        setToast({ ...toast, status: false, error: false });
-        const response = await axios.delete(
-          "https://damp-mesa-30814.herokuapp.com/cart",
-          { data: { productId: product._id } }
-        );
-        if (response.data.success) {
+    if (login) {
+      const isProduct = !!state.cartItems.find(
+        (item) => item.product._id === product._id
+      );
+      if (isProduct) {
+        try {
+          setCartLoader((loader) => true);
+          setToast({ ...toast, status: false, error: false });
+          const response = await axios.delete("http://localhost:4000/cart", {
+            data: { productId: product._id },
+          });
+          if (response.data.success) {
+            setToast({
+              ...toast,
+              status: true,
+              heading: "Item Removed!",
+              msg: `${product.name} is removed from the cart`,
+            });
+            dispatch({ type: "REMOVE_ITEM_FROM_CART", product });
+            setCartLoader((loader) => false);
+          }
+        } catch (err) {
+          console.log(err);
           setToast({
             ...toast,
             status: true,
-            heading: "Item Removed!",
-            msg: `${product.name} is removed from the cart`,
+            heading: "Error occured",
+            msg: `not able to reach the server please try again later`,
+            error: true,
           });
-          dispatch({ type: "REMOVE_ITEM_FROM_CART", product });
           setCartLoader((loader) => false);
         }
-      } catch (err) {
-        console.log(err);
-        setToast({
-          ...toast,
-          status: true,
-          heading: "Error occured",
-          msg: `not able to reach the server please try again later`,
-          error: true,
-        });
-        setCartLoader((loader) => false);
-      }
-    } else {
-      try {
-        setToast({ ...toast, status: false, error: false });
-        setCartLoader(true);
-        const response = await axios.post(
-          "https://damp-mesa-30814.herokuapp.com/cart",
-          { productId: product._id }
-        );
-        if (response.data.success) {
+      } else {
+        try {
+          setToast({ ...toast, status: false, error: false });
+          setCartLoader(true);
+          const response = await axios.post("http://localhost:4000/cart", {
+            productId: product._id,
+          });
+          if (response.data.success) {
+            setToast({
+              ...toast,
+              status: true,
+              heading: "Item Added!",
+              msg: `${product.name} is added to the cart`,
+            });
+            dispatch({ type: "ADD_PRODUCT_TO_CART", product });
+            setCartLoader(false);
+          }
+        } catch (err) {
+          console.log(err);
           setToast({
             ...toast,
             status: true,
-            heading: "Item Added!",
-            msg: `${product.name} is added to the cart`,
+            heading: "Error occured",
+            msg: `not able to reach the server please try again later`,
+            error: true,
           });
-          dispatch({ type: "ADD_PRODUCT_TO_CART", product });
           setCartLoader(false);
         }
-      } catch (err) {
-        console.log(err);
-        setToast({
-          ...toast,
-          status: true,
-          heading: "Error occured",
-          msg: `not able to reach the server please try again later`,
-          error: true,
-        });
-        setCartLoader(false);
       }
+    } else {
+      navigate("../login");
     }
   }
 
   async function handleWishlistAdd(product, state, setWishlistLoader) {
-    const isProduct = !!state.wishlist.find(
-      (item) => item.product._id === product._id
-    );
-    if (isProduct) {
-      try {
-        setToast({ ...toast, status: false, error: false });
-        setWishlistLoader(true);
-        const response = await axios.delete(
-          "https://damp-mesa-30814.herokuapp.com/wishlist",
-          { data: { productId: product._id } }
-        );
-        if (response.data.success) {
+    if (login) {
+      const isProduct = !!state.wishlist.find(
+        (item) => item.product._id === product._id
+      );
+      if (isProduct) {
+        try {
+          setToast({ ...toast, status: false, error: false });
+          setWishlistLoader(true);
+          const response = await axios.delete(
+            "http://localhost:4000/wishlist",
+            {
+              data: { productId: product._id },
+            }
+          );
+          if (response.data.success) {
+            setToast({
+              ...toast,
+              status: true,
+              heading: "Item removed from Wishlist!",
+              msg: `${product.name} is removed from wishlist`,
+            });
+            dispatch({ type: "REMOVE_ITEM_FROM_WISHLIST", product });
+            setWishlistLoader(false);
+          }
+        } catch (err) {
+          console.log(err);
           setToast({
             ...toast,
             status: true,
-            heading: "Item removed from Wishlist!",
-            msg: `${product.name} is removed from wishlist`,
+            heading: "Error occured",
+            msg: `not able to reach the server please try again later`,
+            error: true,
           });
-          dispatch({ type: "REMOVE_ITEM_FROM_WISHLIST", product });
           setWishlistLoader(false);
         }
-      } catch (err) {
-        console.log(err);
-        setToast({
-          ...toast,
-          status: true,
-          heading: "Error occured",
-          msg: `not able to reach the server please try again later`,
-          error: true,
-        });
-        setWishlistLoader(false);
+      } else {
+        try {
+          setToast({ ...toast, status: false, error: false });
+          setWishlistLoader(true);
+          const response = await axios.post("http://localhost:4000/wishlist", {
+            productId: product._id,
+          });
+          if (response.data.success) {
+            setToast({
+              ...toast,
+              status: true,
+              heading: "Item Wishlisted!",
+              msg: `${product.name} is added to wishlist`,
+            });
+            dispatch({ type: "ADD_PRODUCT_TO_WISHLIST", product });
+            setWishlistLoader(false);
+          }
+        } catch (err) {
+          console.log(err);
+          setToast({
+            ...toast,
+            status: true,
+            heading: "Error occured",
+            msg: `not able to reach the server please try again later`,
+            error: true,
+          });
+          setWishlistLoader(false);
+        }
       }
     } else {
-      try {
-        setToast({ ...toast, status: false, error: false });
-        setWishlistLoader(true);
-        const response = await axios.post(
-          "https://damp-mesa-30814.herokuapp.com/wishlist",
-          { productId: product._id }
-        );
-        if (response.data.success) {
-          setToast({
-            ...toast,
-            status: true,
-            heading: "Item Wishlisted!",
-            msg: `${product.name} is added to wishlist`,
-          });
-          dispatch({ type: "ADD_PRODUCT_TO_WISHLIST", product });
-          setWishlistLoader(false);
-        }
-      } catch (err) {
-        console.log(err);
-        setToast({
-          ...toast,
-          status: true,
-          heading: "Error occured",
-          msg: `not able to reach the server please try again later`,
-          error: true,
-        });
-        setWishlistLoader(false);
-      }
+      navigate("../login");
     }
   }
 
@@ -225,7 +234,7 @@ export function Products() {
         </div>
         <div className="products">
           {finalData.map((product) => (
-            <div className="product-card">
+            <div className="product-card" key={product._id}>
               <img
                 src={product.image}
                 alt={product.name}
@@ -276,7 +285,13 @@ export function Products() {
                     />
                     <button
                       className="product-buy-btn btn-active"
-                      onClick={() => navigate(`/products/${product._id}`)}
+                      onClick={() => {
+                        if (login) {
+                          navigate(`/products/${product._id}`);
+                        } else {
+                          navigate("../login");
+                        }
+                      }}
                     >
                       Details
                     </button>

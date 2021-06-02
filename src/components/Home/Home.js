@@ -22,7 +22,7 @@ export function Home() {
       <div className="home-content">
         <div className="spotlight" ref={inputref}>
           {homeData.spotlight.map((item) => (
-            <li className="spotlight-list">
+            <li className="spotlight-list" key={item.id}>
               <div className="spotlight-item">
                 <div className="img-cover">
                   <img
@@ -67,11 +67,11 @@ export function Home() {
             interval={4000}
           >
             {homeData.carousel.map((item) => (
-              <div>
+              <div key={item}>
                 <img
                   className="carousel-image"
                   src={item}
-                  alt="carousel image"
+                  alt="carousel"
                 />
               </div>
             ))}
@@ -79,7 +79,7 @@ export function Home() {
         </div>
         <div className="home-categories">
           {homeData.category.map((item) => (
-            <div className="home-category">
+            <div className="home-category" key={item.categoryName}>
               <img
                 src={item.image}
                 alt=""

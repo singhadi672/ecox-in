@@ -5,6 +5,7 @@ export function cartReducer(state, { type, product, payload }) {
         ...state,
         cartItems: [...payload.cartData],
         wishlist: [...payload.wishlistData],
+        username: payload.username,
       };
     case "ADD_PRODUCT_TO_CART":
       return {
@@ -14,7 +15,7 @@ export function cartReducer(state, { type, product, payload }) {
     case "ADD_PRODUCT_TO_WISHLIST":
       return {
         ...state,
-        wishlist: [...state.wishlist, {product}],
+        wishlist: [...state.wishlist, { product }],
       };
     case "QUANTITY_DEC":
       return product.quantity > 1
@@ -28,7 +29,9 @@ export function cartReducer(state, { type, product, payload }) {
           }
         : {
             ...state,
-            cartItems: state.cartItems.filter((item) => item.product._id !== product.product._id),
+            cartItems: state.cartItems.filter(
+              (item) => item.product._id !== product.product._id
+            ),
           };
     case "QUANTITY_INC":
       return {
@@ -42,12 +45,16 @@ export function cartReducer(state, { type, product, payload }) {
     case "REMOVE_ITEM_FROM_CART":
       return {
         ...state,
-        cartItems: state.cartItems.filter((item) => item.product._id !== product._id),
+        cartItems: state.cartItems.filter(
+          (item) => item.product._id !== product._id
+        ),
       };
     case "REMOVE_ITEM_FROM_WISHLIST":
       return {
         ...state,
-        wishlist: state.wishlist.filter((item) => item.product._id !== product._id),
+        wishlist: state.wishlist.filter(
+          (item) => item.product._id !== product._id
+        ),
       };
 
     case "CLEAR_CART":
@@ -60,6 +67,8 @@ export function cartReducer(state, { type, product, payload }) {
       return { ...state, deliveryOption: payload };
     case "TOGGLE_INSTOCK_OPTION":
       return { ...state, inStock: payload };
+    case "RESET_DATA":
+      return { ...state, cartItems: [], wishlist: [] };
     default:
       return state;
   }

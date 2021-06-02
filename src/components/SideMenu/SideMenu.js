@@ -1,8 +1,10 @@
 import React from "react";
 import "./side-menu.css";
 import { useProducts } from "../../contexts/useProducts";
+import { useAuth } from "../../contexts/auth-context";
 export function SideMenu() {
-  const { state, dispatch, sideMenuStatus } = useProducts();
+  const { sideMenuStatus } = useProducts();
+  const { state, dispatch } = useAuth();
   return (
     <>
       <div

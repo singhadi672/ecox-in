@@ -17,6 +17,7 @@ export function Spotlight({ setSpotlightWindow, spotlightWindow }) {
     return () => {
       clearTimeout(timeoutID);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>

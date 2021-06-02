@@ -9,6 +9,7 @@ export function HomeProvider({ children }) {
     carousel: [],
     category: [],
   });
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -22,14 +23,18 @@ export function HomeProvider({ children }) {
           category: home["0"].category,
           spotlight: home["0"].spotlights,
         });
+        setLoader(false);
       } catch (err) {
         console.log(err);
       }
     })();
+    // eslint-disable-next-line
   }, []);
 
   return (
-    <HomeContext.Provider value={{ homeData }}>{children}</HomeContext.Provider>
+    <HomeContext.Provider value={{ homeData, loader }}>
+      {children}
+    </HomeContext.Provider>
   );
 }
 

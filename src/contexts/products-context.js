@@ -1,45 +1,27 @@
 import axios from "axios";
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-  useState,
-} from "react";
-import { cartReducer } from "../reducers/cart-reducer";
+import { createContext, useEffect, useState } from "react";
+import { useAuth } from "./auth-context";
+
 export const ProductsContext = createContext();
 
 export function ProductsProvider({ children }) {
   const [productsData, setProductsData] = useState([]);
   const [sideMenuStatus, setSideMenuStatus] = useState(false);
-  const [state, dispatch] = useReducer(cartReducer, {
-    cartItems: [],
-    wishlist: [],
-    sortOption: null,
-    priceRange: 1000,
-    deliveryOption: false,
-    inStock: false,
-  });
+  const { state } = useAuth();
+
   useEffect(() => {
     (async () => {
       try {
         const {
           data: { products },
         } = await axios.get("https://damp-mesa-30814.herokuapp.com/products");
-        const {
-          data: { user },
-        } = await axios.get("https://damp-mesa-30814.herokuapp.com/user");
-        const cartData = user["0"].cart.cartItems;
-        const wishlistData = user["0"].wishlist.wishlistItems;
+
         setProductsData(products === undefined ? [] : products);
-        dispatch({
-          type: "SET_CART_WISHLIST",
-          payload: { cartData, wishlistData },
-        });
       } catch (err) {
         console.log(err);
       }
     })();
+    // eslint-disable-next-line
   }, []);
 
   function sortData(data, state) {
@@ -70,8 +52,6 @@ export function ProductsProvider({ children }) {
     <ProductsContext.Provider
       value={{
         filteredData,
-        state,
-        dispatch,
         sideMenuStatus,
         setSideMenuStatus,
       }}

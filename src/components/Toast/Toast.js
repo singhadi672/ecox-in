@@ -4,21 +4,22 @@ import "./toast.css";
 export function Toast({ toast, setToast }) {
   useEffect(() => {
     const toastId = setTimeout(() => {
-      setToast((toast) => false);
+      setToast(false);
     }, 2500);
 
     return () => {
       clearTimeout(toastId);
     };
-  }, [toast]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div
       className={
-        toast.error
+        toast?.error
           ? toast.status
             ? "toast-failure toast-inactive"
             : "toast-failure toast-active"
-          : toast.status
+          : toast?.status
           ? "toast-success toast-inactive"
           : "toast-success toast-active"
       }

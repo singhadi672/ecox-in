@@ -8,14 +8,28 @@ import {
   faShoppingCart,
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useProducts } from "../../contexts/useProducts";
 import { useAuth } from "../../contexts/auth-context";
+import { setupAuthHeaderForServiceCalls } from "../../contexts/auth-context";
 
 export function Nav() {
-  const { state, sideMenustatus, setSideMenuStatus } = useProducts();
+  const { setSideMenuStatus } = useProducts();
+  const { login, state, setLogin, dispatch } = useAuth();
   let navigate = useNavigate();
-  const states = useLocation();
+
+  async function handleSignInOut() {
+    if (login) {
+      localStorage?.removeItem("login");
+      setLogin(false);
+      setupAuthHeaderForServiceCalls(null);
+      navigate("../login", { replace: true });
+      dispatch({ type: "RESET_DATA" });
+    } else {
+      navigate("../login");
+    }
+  }
+
   return (
     <nav className="nav-main">
       <div className="nav-section-top">
@@ -52,7 +66,10 @@ export function Nav() {
               )}
             </button>
           </NavLink>
-          <button className="sign-in-btn">Sign In</button>
+          <p>{login ? state.username : "user"}</p>
+          <button className="sign-in-btn" onClick={handleSignInOut}>
+            {login ? "Sign Out" : "Sign In"}
+          </button>
         </div>
       </div>
       <div className="nav-search">
@@ -84,7 +101,10 @@ export function Nav() {
             )}
           </button>
         </NavLink>
-        <button className="sign-in-btn">Sign In</button>
+        <p>{login ? state.username : "user"}</p>
+        <button className="sign-in-btn" onClick={handleSignInOut}>
+          {login ? "Sign Out" : "Sign In"}
+        </button>
       </div>
     </nav>
   );

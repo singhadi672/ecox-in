@@ -5,6 +5,7 @@ import "./productDetails.css";
 import axios from "axios";
 import { Toast } from "../Toast/Toast";
 import { AddToCartButton } from "../Products/AddToCartButton";
+import { useAuth } from "../../contexts/auth-context";
 
 export function ProductDetails() {
   const { id } = useParams();
@@ -16,7 +17,8 @@ export function ProductDetails() {
     error: false,
   });
 
-  const { filteredData, state, dispatch } = useProducts();
+  const { filteredData } = useProducts();
+  const { state, dispatch } = useAuth();
 
   const product = filteredData.find((item) => item._id === id);
 
@@ -40,7 +42,7 @@ export function ProductDetails() {
             msg: `${product.name} is removed from the cart`,
           });
           dispatch({ type: "REMOVE_ITEM_FROM_CART", product });
-          setCartLoader((loader) => false);
+          setCartLoader(false);
         }
       } catch (err) {
         console.log(err);
@@ -51,7 +53,7 @@ export function ProductDetails() {
           msg: `not able to reach the server please try again later`,
           error: true,
         });
-        setCartLoader((loader) => false);
+        setCartLoader(false);
       }
     } else {
       try {

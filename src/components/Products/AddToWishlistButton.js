@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  faStar,
   faHeart as heartFull,
   faHeartbeat,
 } from "@fortawesome/free-solid-svg-icons";

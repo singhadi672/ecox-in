@@ -2,13 +2,13 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useState } from "react";
-import { useProducts } from "../../contexts/useProducts";
 import "./cart.css";
 import { Toast } from "../Toast/Toast";
 import { CartQuantityButton } from "./CartQuantityButton";
+import { useAuth } from "../../contexts/auth-context";
 
 export function Cart() {
-  const { state, dispatch } = useProducts();
+  const { state, dispatch } = useAuth();
   const { cartItems } = state;
   const [toast, setToast] = useState({
     status: false,
@@ -27,7 +27,9 @@ export function Cart() {
         setQuantityTab(true);
         const response = await axios.delete(
           "https://damp-mesa-30814.herokuapp.com/cart",
-          { data: { productId: item.product._id } }
+          {
+            data: { productId: item.product._id },
+          }
         );
         const { product } = item;
         if (response.data.success) {
@@ -41,7 +43,6 @@ export function Cart() {
           setQuantityTab(false);
         }
       } catch (err) {
-        console.log(err);
         setToast({
           ...toast,
           status: true,
@@ -86,6 +87,7 @@ export function Cart() {
                 item.quantity + 1
               }`,
             });
+
             dispatch({
               type: "QUANTITY_INC",
               product: item,
@@ -112,7 +114,9 @@ export function Cart() {
       setToast({ ...toast, status: false, error: false });
       const response = await axios.delete(
         "https://damp-mesa-30814.herokuapp.com/cart",
-        { data: { productId: product._id } }
+        {
+          data: { productId: product._id },
+        }
       );
       console.log(response);
       if (response.data.success) {
@@ -151,7 +155,7 @@ export function Cart() {
               </button>
             </div>
             {cartItems.map((item) => (
-              <div className="cart-item">
+              <div className="cart-item" key={item.product._id}>
                 <img src={item.product.image} alt="" />
                 <div className="cart-item-desc">
                   <h2>

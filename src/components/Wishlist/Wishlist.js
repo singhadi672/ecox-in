@@ -1,7 +1,6 @@
 import { faStar, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
-import { useProducts } from "../../contexts/useProducts";
 import "../Products/products.css";
 import { ratingGenerator } from "../../util";
 import "./wishlist.css";
@@ -9,9 +8,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AddToCartFromWishlistButton } from "./AddToCartFromWishlistButton";
 import { Toast } from "../Toast/Toast";
+import { useAuth } from "../../contexts/auth-context";
 
 export function Wishlist() {
-  const { dispatch, state } = useProducts();
+  const { dispatch, state } = useAuth();
   const [toast, setToast] = useState({
     status: false,
     heading: "",
@@ -27,10 +27,9 @@ export function Wishlist() {
       setToast({ ...toast, status: false, error: false });
       setCartLoader(true);
       try {
-        const response = await axios.post(
-          "https://damp-mesa-30814.herokuapp.com/cart",
-          { productId: product._id }
-        );
+        const response = await axios.post("http://localhost:4000/cart", {
+          productId: product._id,
+        });
         if (response.data.success) {
           setToast({
             ...toast,
@@ -58,10 +57,9 @@ export function Wishlist() {
   async function handleWishlistAdd(product, state) {
     try {
       setToast({ ...toast, status: false, error: false });
-      const response = await axios.delete(
-        "https://damp-mesa-30814.herokuapp.com/wishlist",
-        { data: { productId: product.product._id } }
-      );
+      const response = await axios.delete("http://localhost:4000/wishlist", {
+        data: { productId: product.product._id },
+      });
       if (response.data.success) {
         setToast({
           ...toast,
@@ -91,7 +89,7 @@ export function Wishlist() {
         <>
           <div className="wishlist">
             {state.wishlist.map((item) => (
-              <div className="product-card">
+              <div className="product-card" key={item.product._id}>
                 <img
                   src={item.product.image}
                   alt={item.product.name}
