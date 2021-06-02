@@ -150,7 +150,7 @@ export function AuthProvider({ children }) {
           payload: { cartData, wishlistData, username },
         });
         setToken(response.data.token);
-        setupAuthHeaderForServiceCalls(token);
+        setupAuthHeaderForServiceCalls(response.data.token);
         setLogin(true);
       }
       return response;
