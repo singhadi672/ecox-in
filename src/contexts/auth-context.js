@@ -25,6 +25,13 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(
     loginStatus.token ? loginStatus.token : null
   );
+  const [quantityTab, setQuantityTab] = useState(false);
+  const [toast, setToast] = useState({
+    status: false,
+    heading: "",
+    msg: "",
+    error: false,
+  });
 
   const [state, dispatch] = useReducer(cartReducer, {
     username: null,
@@ -163,6 +170,10 @@ export function AuthProvider({ children }) {
         token,
         state,
         dispatch,
+        toast,
+        quantityTab,
+        setQuantityTab,
+        setToast,
       }}
     >
       {children}

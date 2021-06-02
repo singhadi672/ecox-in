@@ -4,7 +4,7 @@ import "./toast.css";
 export function Toast({ toast, setToast }) {
   useEffect(() => {
     const toastId = setTimeout(() => {
-      setToast(false);
+      setToast({ ...toast, status: false });
     }, 2500);
 
     return () => {

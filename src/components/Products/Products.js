@@ -302,7 +302,7 @@ export function Products() {
           ))}
         </div>
       </div>
-      <Toast toast={toast} setToast={setToast} />
+      {toast.status && <Toast toast={toast} setToast={setToast} />}
     </div>
   );
 }

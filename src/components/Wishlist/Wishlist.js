@@ -11,13 +11,7 @@ import { Toast } from "../Toast/Toast";
 import { useAuth } from "../../contexts/auth-context";
 
 export function Wishlist() {
-  const { dispatch, state } = useAuth();
-  const [toast, setToast] = useState({
-    status: false,
-    heading: "",
-    msg: "",
-    error: false,
-  });
+  const { dispatch, state, toast, setToast } = useAuth();
 
   async function handleCartAdd(product, state, setCartLoader) {
     const isProduct = !!state.cartItems.find(
@@ -165,7 +159,7 @@ export function Wishlist() {
           <h2>"Wishlist is Empty"</h2>
         </div>
       )}
-      <Toast toast={toast} setToast={setToast} />
+      {toast.status && <Toast toast={toast} setToast={setToast} />}
     </>
   );
 }

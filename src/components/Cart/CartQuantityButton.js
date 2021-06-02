@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { useAuth } from "../../contexts/auth-context";
 
 export function CartQuantityButton({ toggleQuantity, item }) {
-  const [quantityTab, setQuantityTab] = useState(false);
+  const { quantityTab, setQuantityTab } = useAuth();
 
   return (
     <>

@@ -8,14 +8,10 @@ import { CartQuantityButton } from "./CartQuantityButton";
 import { useAuth } from "../../contexts/auth-context";
 
 export function Cart() {
-  const { state, dispatch } = useAuth();
+  const { state, dispatch, toast, setToast, setQuantityTab, quantityTab } =
+    useAuth();
   const { cartItems } = state;
-  const [toast, setToast] = useState({
-    status: false,
-    heading: "",
-    msg: "",
-    error: false,
-  });
+
   function calculateTotal(acc, value) {
     return (acc += parseInt(value.product.price * value.quantity));
   }
@@ -23,7 +19,6 @@ export function Cart() {
   async function toggleQuantity(item, type, setQuantityTab) {
     if (item.quantity < 2 && type === "dec") {
       try {
-        setToast({ ...toast, status: false, error: false });
         setQuantityTab(true);
         const response = await axios.delete(
           "https://damp-mesa-30814.herokuapp.com/cart",
@@ -37,7 +32,7 @@ export function Cart() {
             ...toast,
             status: true,
             heading: "Item Removed!",
-            msg: `${item.product.name} is removed from cart`,
+            msg: `item is removed from cart`,
           });
           dispatch({ type: "REMOVE_ITEM_FROM_CART", product });
           setQuantityTab(false);
@@ -213,7 +208,7 @@ export function Cart() {
           <h2>"Cart is Empty"</h2>
         </div>
       )}
-      <Toast toast={toast} setToast={setToast} />
+      {toast.status && <Toast toast={toast} setToast={setToast} />}
     </>
   );
 }
