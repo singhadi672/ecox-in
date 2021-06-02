@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react/cjs/react.development";
 import { useAuth } from "../../contexts/auth-context";
 import "./signup.css";
 
