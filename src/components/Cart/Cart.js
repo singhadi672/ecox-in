@@ -21,7 +21,7 @@ export function Cart() {
       try {
         setQuantityTab(true);
         const response = await axios.delete(
-          "https://damp-mesa-30814.herokuapp.com/cart",
+          "https://ecox-in-backend.vercel.app/cart",
           {
             data: { productId: item.product._id },
           }
@@ -53,7 +53,7 @@ export function Cart() {
         setQuantityTab(true);
         setToast({ ...toast, status: false, error: false });
         const response = await axios.post(
-          `https://damp-mesa-30814.herokuapp.com/cart/${item.product._id}`,
+          `https://ecox-in-backend.vercel.app/cart/${item.product._id}`,
           body
         );
 
@@ -64,9 +64,8 @@ export function Cart() {
               ...toast,
               status: true,
               heading: "Quantity Decreased!",
-              msg: `you have changed ${item.product.name}'s quantity to ${
-                item.quantity - 1
-              }`,
+              msg: `you have changed ${item.product.name}'s quantity to ${item.quantity - 1
+                }`,
             });
             dispatch({
               type: "QUANTITY_DEC",
@@ -78,9 +77,8 @@ export function Cart() {
               ...toast,
               status: true,
               heading: "Quantity Increased!",
-              msg: `you have changed ${item.product.name}'s quantity to ${
-                item.quantity + 1
-              }`,
+              msg: `you have changed ${item.product.name}'s quantity to ${item.quantity + 1
+                }`,
             });
 
             dispatch({
@@ -108,7 +106,7 @@ export function Cart() {
     try {
       setToast({ ...toast, status: false, error: false });
       const response = await axios.delete(
-        "https://damp-mesa-30814.herokuapp.com/cart",
+        "https://ecox-in-backend.vercel.app/cart",
         {
           data: { productId: product._id },
         }

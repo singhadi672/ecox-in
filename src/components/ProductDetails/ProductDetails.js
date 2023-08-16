@@ -31,7 +31,7 @@ export function ProductDetails() {
         setCartLoader((loader) => true);
         setToast({ ...toast, status: false, error: false });
         const response = await axios.delete(
-          "https://damp-mesa-30814.herokuapp.com/cart",
+          "https://ecox-in-backend.vercel.app/cart",
           { data: { productId: product._id } }
         );
         if (response.data.success) {
@@ -60,7 +60,7 @@ export function ProductDetails() {
         setToast({ ...toast, status: false, error: false });
         setCartLoader(true);
         const response = await axios.post(
-          "https://damp-mesa-30814.herokuapp.com/cart",
+          "https://ecox-in-backend.vercel.app/cart",
           { productId: product._id }
         );
         if (response.data.success) {

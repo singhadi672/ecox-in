@@ -16,7 +16,7 @@ export function HomeProvider({ children }) {
       try {
         const {
           data: { home },
-        } = await axios.get("https://damp-mesa-30814.herokuapp.com/home");
+        } = await axios.get("https://ecox-in-backend.vercel.app/home");
         setHomeData({
           ...homeData,
           carousel: home["0"].carouselImages,

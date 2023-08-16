@@ -14,7 +14,7 @@ export function ProductsProvider({ children }) {
       try {
         const {
           data: { products },
-        } = await axios.get("https://damp-mesa-30814.herokuapp.com/products");
+        } = await axios.get("https://ecox-in-backend.vercel.app/products");
 
         setProductsData(products === undefined ? [] : products);
       } catch (err) {

@@ -65,7 +65,7 @@ export function AuthProvider({ children }) {
       if (token) {
         setupAuthHeaderForServiceCalls(token);
         const response = await axios.get(
-          "https://damp-mesa-30814.herokuapp.com/user"
+          "https://ecox-in-backend.vercel.app/user"
         );
         setupAuthExceptionHandler(navigate);
         const cartData = response.data.user.cart.cartItems;
@@ -97,7 +97,7 @@ export function AuthProvider({ children }) {
   async function loginUserWithCredentials(email, password) {
     try {
       const response = await axios.post(
-        "https://damp-mesa-30814.herokuapp.com/login",
+        "https://ecox-in-backend.vercel.app/login",
         {
           email: email,
           password: password,
@@ -129,7 +129,7 @@ export function AuthProvider({ children }) {
   async function signupUser(username, email, password) {
     try {
       const response = await axios.post(
-        "https://damp-mesa-30814.herokuapp.com/signup",
+        "https://ecox-in-backend.vercel.app/signup",
         {
           email,
           password,
